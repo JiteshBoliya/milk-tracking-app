@@ -19,47 +19,8 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatListModule
   ],
-  template: `
-    <mat-toolbar color="primary">
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>Milk Tracking App</span>
-    </mat-toolbar>
-
-    <mat-sidenav-container>
-      <mat-sidenav #sidenav mode="side">
-        <mat-nav-list>
-          <a mat-list-item routerLink="/clients" routerLinkActive="active">
-            <mat-icon matListItemIcon>people</mat-icon>
-            <span matListItemTitle>Clients</span>
-          </a>
-          <a mat-list-item routerLink="/deliveries" routerLinkActive="active">
-            <mat-icon matListItemIcon>local_shipping</mat-icon>
-            <span matListItemTitle>Deliveries</span>
-          </a>
-        </mat-nav-list>
-      </mat-sidenav>
-
-      <mat-sidenav-content>
-        <router-outlet></router-outlet>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  `,
-  styles: [`
-    mat-sidenav-container {
-      height: calc(100vh - 64px);
-    }
-    mat-sidenav {
-      width: 250px;
-    }
-    mat-nav-list {
-      padding-top: 20px;
-    }
-    .active {
-      background-color: rgba(0, 0, 0, 0.04);
-    }
-  `]
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'milk-tracking-app';

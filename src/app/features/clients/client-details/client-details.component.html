@@ -1,0 +1,62 @@
+<div class="client-details">
+    <mat-card *ngIf="client$ | async as client">
+      <mat-card-header>
+        <mat-card-title>{{client.name}}</mat-card-title>
+        <button mat-icon-button [routerLink]="['edit']">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="client-info">
+          <p><strong>Address:</strong> {{client.address}}</p>
+          <p><strong>Contact:</strong> {{client.contact}}</p>
+          <p><strong>Milk Type:</strong> {{client.milkType}}</p>
+          <p><strong>Quantity per Day:</strong> {{client.quantityPerDay}}L</p>
+          <p><strong>Rate per Liter:</strong> ₹{{client.ratePerLiter}}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="delivery-history">
+      <mat-card-header>
+        <mat-card-title>Delivery History</mat-card-title>
+        <button mat-raised-button color="primary" (click)="addDelivery()">
+          <mat-icon>add</mat-icon>
+          Add Delivery
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let delivery">{{delivery.date | date}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef>Quantity (L)</th>
+            <td mat-cell *matCellDef="let delivery">{{delivery.quantity}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="notes">
+            <th mat-header-cell *matHeaderCellDef>Notes</th>
+            <td mat-cell *matCellDef="let delivery">{{delivery.notes}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let delivery">
+              <button mat-icon-button (click)="editDelivery(delivery)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteDelivery(delivery.id!)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>

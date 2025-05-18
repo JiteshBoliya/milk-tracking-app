@@ -29,67 +29,8 @@ import { Observable } from 'rxjs';
     MatCardModule,
     MatSelectModule
   ],
-  template: `
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{isEditMode ? 'Edit' : 'Add'}} Delivery</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
-          <mat-form-field appearance="fill" *ngIf="!clientId">
-            <mat-label>Client</mat-label>
-            <mat-select formControlName="clientId" required>
-              <mat-option *ngFor="let client of clients$ | async" [value]="client.id">
-                {{client.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="date" required>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Quantity (Liters)</mat-label>
-            <input matInput type="number" formControlName="quantity" required>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Notes</mat-label>
-            <textarea matInput formControlName="notes"></textarea>
-          </mat-form-field>
-
-          <div class="form-actions">
-            <button mat-button type="button" (click)="goBack()">Cancel</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="deliveryForm.invalid">
-              {{isEditMode ? 'Update' : 'Save'}}
-            </button>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  `,
-  styles: [`
-    mat-card {
-      margin: 20px;
-      max-width: 600px;
-      margin: 20px auto;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 16px;
-    }
-  `]
+  templateUrl: './delivery-form.component.html',
+  styleUrls: ['./delivery-form.component.scss']
 })
 export class DeliveryFormComponent implements OnInit {
   deliveryForm: FormGroup;
