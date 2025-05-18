@@ -1,0 +1,48 @@
+// @use '@angular/material' as mat;
+// @use '@angular/material/theming' as mat-core;
+
+// $my-primary: mat-core.define-palette(mat-core.$indigo-palette);
+// $my-accent: mat-core.define-palette(mat-core.$pink-palette, A200, A100, A400);
+
+// $my-theme: mat-core.define-light-theme((
+//   color: (
+//     primary: $my-primary,
+//     accent: $my-accent,
+//   ),
+// ));
+
+// @include mat-core.all-component-themes($my-theme);
+
+
+// Global styles
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mat-mdc-card {
+  margin: 20px;
+}
+
+.mat-mdc-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.mat-mdc-table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
