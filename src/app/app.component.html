@@ -1,25 +1,14 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Milk Tracking App</span>
-</mat-toolbar>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">MTA</a>
+  </div>
+</nav>
 
-<mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side">
-    <mat-nav-list>
-      <a mat-list-item routerLink="/clients" routerLinkActive="active">
-        <mat-icon matListItemIcon>people</mat-icon>
-        <span matListItemTitle>Clients</span>
-      </a>
-      <a mat-list-item routerLink="/deliveries" routerLinkActive="active">
-        <mat-icon matListItemIcon>local_shipping</mat-icon>
-        <span matListItemTitle>Deliveries</span>
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
+<div class="container-fluid">
+  <div >
     <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</div>

@@ -1,62 +1,61 @@
-<div class="client-details">
-    <mat-card *ngIf="client$ | async as client">
-      <mat-card-header>
-        <mat-card-title>{{client.name}}</mat-card-title>
-        <button mat-icon-button [routerLink]="['edit']">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="client-info">
-          <p><strong>Address:</strong> {{client.address}}</p>
-          <p><strong>Contact:</strong> {{client.contact}}</p>
-          <p><strong>Milk Type:</strong> {{client.milkType}}</p>
-          <p><strong>Quantity per Day:</strong> {{client.quantityPerDay}}L</p>
-          <p><strong>Rate per Liter:</strong> ₹{{client.ratePerLiter}}</p>
-        </div>
-      </mat-card-content>
-    </mat-card>
+<div class="client-details mt-4">
 
-    <mat-card class="delivery-history">
-      <mat-card-header>
-        <mat-card-title>Delivery History</mat-card-title>
-        <button mat-raised-button color="primary" (click)="addDelivery()">
-          <mat-icon>add</mat-icon>
-          Add Delivery
-        </button>
-      </mat-card-header>
-      <mat-card-content>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-          <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef>Date</th>
-            <td mat-cell *matCellDef="let delivery">{{delivery.date | date}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef>Quantity (L)</th>
-            <td mat-cell *matCellDef="let delivery">{{delivery.quantity}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="notes">
-            <th mat-header-cell *matHeaderCellDef>Notes</th>
-            <td mat-cell *matCellDef="let delivery">{{delivery.notes}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>Actions</th>
-            <td mat-cell *matCellDef="let delivery">
-              <button mat-icon-button (click)="editDelivery(delivery)">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button (click)="deleteDelivery(delivery.id!)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      </mat-card-content>
-    </mat-card>
+  <!-- Client Card -->
+  <div class="card mb-4" *ngIf="client">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="card-title mb-0">{{client.name }}</h5>
+      <a class="btn btn-sm btn-outline-primary" [routerLink]="['edit']">
+        <i class="bi bi-pencil"></i> <!-- Bootstrap icon or use Font Awesome -->
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="client-info">
+        <p><strong>Address:</strong> {{client.address}}</p>
+        <p><strong>Contact:</strong> {{client.contact}}</p>
+        <p><strong>Milk Type:</strong> {{client.milkType}}</p>
+        <p><strong>Quantity per Day:</strong> {{client.quantityPerDay}}L</p>
+        <p><strong>Rate per Liter:</strong> ₹{{client.ratePerLiter}}</p>
+      </div>
+    </div>
   </div>
+
+  <!-- Delivery History Card -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="card-title mb-0">Delivery History</h5>
+      <button class="btn btn-primary btn-sm" (click)="addDelivery()">
+        <i class="bi bi-plus"></i> Add Delivery
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>Date</th>
+              <th>Quantity (L)</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let delivery of deliveries$ | async">
+              <td>{{delivery.date | date}}</td>
+              <td>{{delivery.quantity}}</td>
+              <td>{{delivery.notes}}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-secondary me-1" (click)="editDelivery(delivery)">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteDelivery(delivery.id!)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

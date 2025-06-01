@@ -1,78 +1,65 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Deliveries</mat-card-title>
-      <button mat-raised-button color="primary" routerLink="new">
-        <mat-icon>add</mat-icon>
-        Add Delivery
-      </button>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
-        <div class="filter-row">
-          <mat-form-field appearance="fill">
-            <mat-label>Client</mat-label>
-            <mat-select formControlName="clientId">
-              <mat-option value="">All Clients</mat-option>
-              <mat-option *ngFor="let client of clients$ | async" [value]="client.id">
-                {{client.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Start Date</mat-label>
-            <input matInput [matDatepicker]="startPicker" formControlName="startDate">
-            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-            <mat-datepicker #startPicker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>End Date</mat-label>
-            <input matInput [matDatepicker]="endPicker" formControlName="endDate">
-            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-            <mat-datepicker #endPicker></mat-datepicker>
-          </mat-form-field>
-
-          <button mat-raised-button type="submit">Apply Filters</button>
-          <button mat-button type="button" (click)="clearFilters()">Clear</button>
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="card-title mb-0">Deliveries</h5>
+    <a routerLink="new" class="btn btn-primary">
+      <i class="bi bi-plus"></i>
+      Add Delivery
+    </a>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="mb-3">
+      <div class="row g-2 align-items-end">
+        <div class="col-md-3">
+          <label for="clientId" class="form-label">Client</label>
+          <select class="form-select" id="clientId" formControlName="clientId">
+            <option value="">All Clients</option>
+            <option *ngFor="let client of clients$ | async" [value]="client.id">
+              {{client.name}}
+            </option>
+          </select>
         </div>
-      </form>
-
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>Date</th>
-          <td mat-cell *matCellDef="let delivery">{{delivery.date | date}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="clientName">
-          <th mat-header-cell *matHeaderCellDef>Client</th>
-          <td mat-cell *matCellDef="let delivery">{{delivery.clientName}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef>Quantity (L)</th>
-          <td mat-cell *matCellDef="let delivery">{{delivery.quantity}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="notes">
-          <th mat-header-cell *matHeaderCellDef>Notes</th>
-          <td mat-cell *matCellDef="let delivery">{{delivery.notes}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>Actions</th>
-          <td mat-cell *matCellDef="let delivery">
-            <button mat-icon-button [routerLink]="[delivery.id, 'edit']">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button (click)="deleteDelivery(delivery.id!)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <div class="col-md-3">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input type="date" class="form-control" id="startDate" formControlName="startDate">
+        </div>
+        <div class="col-md-3">
+          <label for="endDate" class="form-label">End Date</label>
+          <input type="date" class="form-control" id="endDate" formControlName="endDate">
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+          <button type="submit" class="btn btn-primary">Apply Filters</button>
+          <button type="button" class="btn btn-secondary" (click)="clearFilters()">Clear</button>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Client</th>
+            <th>Quantity (L)</th>
+            <th>Notes</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let delivery of dataSource.data">
+            <td>{{delivery.date | date}}</td>
+            <td>{{delivery.clientId}}</td>
+            <td>{{delivery.quantity}}</td>
+            <td>{{delivery.notes}}</td>
+            <td class="text-center">
+              <a [routerLink]="[delivery.id, 'edit']" class="btn btn-sm btn-outline-primary me-2">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteDelivery(delivery.id!)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
       </table>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
+</div>

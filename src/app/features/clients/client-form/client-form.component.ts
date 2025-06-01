@@ -2,11 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCardModule } from '@angular/material/card';
 import { ClientService } from '../../../services/client.service';
 import { Client } from '../../../models/client.model';
 
@@ -15,11 +10,6 @@ import { Client } from '../../../models/client.model';
   standalone: true,
   imports: [
     CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatCardModule,
     FormsModule,
     ReactiveFormsModule
   ],
@@ -39,10 +29,10 @@ export class ClientFormComponent implements OnInit {
   ) {
     this.clientForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      address: new FormControl('', Validators.required),
-      contact: new FormControl('', Validators.required),
+      address: new FormControl(''),
+      contact: new FormControl(''),
       milkType: new FormControl('cow', Validators.required),
-      quantityPerDay: new FormControl(0, [Validators.required, Validators.min(0)]),
+      // quantityPerDay: new FormControl(0, [Validators.required, Validators.min(0)]),
       ratePerLiter: new FormControl(0, [Validators.required, Validators.min(0)])
     });
   }

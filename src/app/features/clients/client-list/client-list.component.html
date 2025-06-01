@@ -1,47 +1,49 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Clients</mat-card-title>
-      <button mat-raised-button color="primary" routerLink="new">
-        <mat-icon>add</mat-icon>
-        Add New Client
-      </button>
-    </mat-card-header>
-    <mat-card-content>
-      <table mat-table [dataSource]="clients" class="mat-elevation-z8">
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let client">{{client.name}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="contact">
-          <th mat-header-cell *matHeaderCellDef>Contact</th>
-          <td mat-cell *matCellDef="let client">{{client.contact}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="milkType">
-          <th mat-header-cell *matHeaderCellDef>Milk Type</th>
-          <td mat-cell *matCellDef="let client">{{client.milkType}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="quantityPerDay">
-          <th mat-header-cell *matHeaderCellDef>Quantity/Day</th>
-          <td mat-cell *matCellDef="let client">{{client.quantityPerDay}}L</td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>Actions</th>
-          <td mat-cell *matCellDef="let client">
-            <button mat-icon-button [routerLink]="[client.id]">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-icon-button [routerLink]="[client.id, 'edit']">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<div class="card m-2">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="card-title mb-0">Clients</h5>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFormModal">
+      <i class="bi bi-plus"></i>
+      Client
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <!-- <th class="text-center">Actions</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clients" [routerLink]="[client.id]">
+            <td>{{client.name}}</td>
+            <!-- <td class="text-center">
+              <a [routerLink]="[client.id]" class="btn btn-sm btn-outline-primary me-2">
+                <i class="bi bi-eye"></i>
+              </a>
+              <a [routerLink]="[client.id, 'edit']" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-pencil"></i>
+              </a>
+            </td> -->
+          </tr>
+        </tbody>
       </table>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addFormModal" tabindex="-1" aria-labelledby="addFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addFormModalLabel">Add Client</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-client-form></app-client-form>
+      </div>
+    </div>
+  </div>
+</div>

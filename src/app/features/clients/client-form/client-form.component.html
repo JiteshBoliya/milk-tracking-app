@@ -1,48 +1,48 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>{{isEditMode ? 'Edit' : 'Add'}} Client</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="name" required>
-        </mat-form-field>
+<!-- <div class="card">
+  <div class="card-header">
+    <h5 class="card-title mb-0">{{isEditMode ? 'Edit' : 'Add'}} Client</h5>
+  </div>
+  <div class="card-body"> -->
+    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name" required>
+      </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <textarea matInput formControlName="address" required></textarea>
-        </mat-form-field>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <textarea class="form-control" id="address" formControlName="address" rows="3" required></textarea>
+      </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Contact</mat-label>
-          <input matInput formControlName="contact" required>
-        </mat-form-field>
+      <div class="mb-3">
+        <label for="contact" class="form-label">Contact</label>
+        <input type="text" class="form-control" id="contact" formControlName="contact" required>
+      </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Milk Type</mat-label>
-          <mat-select formControlName="milkType" required>
-            <mat-option value="cow">Cow</mat-option>
-            <mat-option value="buffalo">Buffalo</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="mb-3">
+        <label for="milkType" class="form-label">Milk Type</label>
+        <select class="form-select" id="milkType" formControlName="milkType" required>
+          <option value="cow">Cow</option>
+          <option value="buffalo">Buffalo</option>
+        </select>
+      </div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Quantity per Day (Liters)</mat-label>
-          <input matInput type="number" formControlName="quantityPerDay" required>
-        </mat-form-field>
+      <!-- <div class="mb-3">
+        <label for="quantityPerDay" class="form-label">Quantity per Day (Liters)</label>
+        <input type="number" class="form-control" id="quantityPerDay" formControlName="quantityPerDay" required>
+      </div> -->
 
-        <mat-form-field appearance="fill">
-          <mat-label>Rate per Liter</mat-label>
-          <input matInput type="number" formControlName="ratePerLiter" required>
-        </mat-form-field>
+      <div class="mb-3">
+        <label for="ratePerLiter" class="form-label">Rate per Liter</label>
+        <input type="number" class="form-control" id="ratePerLiter" formControlName="ratePerLiter" required>
+      </div>
 
-        <div class="form-actions">
-          <button mat-button type="button" (click)="goBack()">Cancel</button>
-          <button mat-raised-button color="primary" type="submit" [disabled]="clientForm.invalid">
-            {{isEditMode ? 'Update' : 'Save'}}
-          </button>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+      <div class="d-flex gap-2">
+        <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="clientForm.invalid">
+          {{isEditMode ? 'Update' : 'Save'}}
+        </button>
+      </div>
+    </form>
+  <!-- </div>
+</div> -->

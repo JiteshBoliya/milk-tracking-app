@@ -34,9 +34,8 @@ import { Observable, combineLatest, map } from 'rxjs';
   styleUrls: ['./client-details.component.scss']
 })
 export class ClientDetailsComponent implements OnInit {
-  client$: Observable<Client | null>;
+  client: Client | null = null;
   deliveries$: Observable<Delivery[]>;
-  dataSource = new MatTableDataSource<Delivery>([]);
   displayedColumns: string[] = ['date', 'quantity', 'notes', 'actions'];
 
   constructor(
@@ -46,11 +45,11 @@ export class ClientDetailsComponent implements OnInit {
     private deliveryService: DeliveryService
   ) {
     const clientId = this.route.snapshot.paramMap.get('id')!;
-    this.client$ = this.clientService.getClientById(clientId);
-    this.deliveries$ = this.deliveryService.getDeliveriesByClient(clientId);
-    this.deliveries$.subscribe(deliveries => {
-      this.dataSource.data = deliveries || [];
+    this.clientService.getClientById(clientId).subscribe((res) => {
+        this.client = res;
     });
+    
+    this.deliveries$ = this.deliveryService.getDeliveriesByClient(clientId);
   }
 
   ngOnInit() {}
