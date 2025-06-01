@@ -20,14 +20,6 @@ import { Observable, combineLatest, map } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTableModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatInputModule,
     RouterModule
   ],
   templateUrl: './client-details.component.html',
@@ -35,7 +27,7 @@ import { Observable, combineLatest, map } from 'rxjs';
 })
 export class ClientDetailsComponent implements OnInit {
   client: Client | null = null;
-  deliveries$: Observable<Delivery[]>;
+  deliveries: any;
   displayedColumns: string[] = ['date', 'quantity', 'notes', 'actions'];
 
   constructor(
@@ -49,7 +41,17 @@ export class ClientDetailsComponent implements OnInit {
         this.client = res;
     });
     
-    this.deliveries$ = this.deliveryService.getDeliveriesByClient(clientId);
+    this.deliveryService.getDeliveriesByClient(clientId).subscribe({
+      next: (res) => {
+      console.log('----------',res);
+      
+      this.deliveries = res;
+    },
+    error: (err) => {
+      console.log('++++++++', err);
+      
+    }
+    });
   }
 
   ngOnInit() {}

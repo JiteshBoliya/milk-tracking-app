@@ -63,6 +63,6 @@ export class ClientFormComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/clients']);
+    this.isEditMode ? this.router.navigate(['clients', this.clientId]): this.router.navigate(['']);
   }
 } 

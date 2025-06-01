@@ -1,12 +1,12 @@
-mat-sidenav-container {
-  height: calc(100vh - 64px);
+.navbar {
+  background-color: #e5e5e5 !important;
 }
-mat-sidenav {
-  width: 250px;
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-mat-nav-list {
-  padding-top: 20px;
-}
-.active {
-  background-color: rgba(0, 0, 0, 0.04);
+.logo {
+  width: 100px;
+  height: 100px;
 }

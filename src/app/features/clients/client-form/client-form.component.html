@@ -1,25 +1,25 @@
-<!-- <div class="card">
+<div class="card mt-2">
   <div class="card-header">
     <h5 class="card-title mb-0">{{isEditMode ? 'Edit' : 'Add'}} Client</h5>
   </div>
-  <div class="card-body"> -->
+  <div class="card-body">
     <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control" id="name" formControlName="name" required>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="address" class="form-label">Address</label>
         <textarea class="form-control" id="address" formControlName="address" rows="3" required></textarea>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="contact" class="form-label">Contact</label>
         <input type="text" class="form-control" id="contact" formControlName="contact" required>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="milkType" class="form-label">Milk Type</label>
         <select class="form-select" id="milkType" formControlName="milkType" required>
           <option value="cow">Cow</option>
@@ -32,7 +32,7 @@
         <input type="number" class="form-control" id="quantityPerDay" formControlName="quantityPerDay" required>
       </div> -->
 
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="ratePerLiter" class="form-label">Rate per Liter</label>
         <input type="number" class="form-control" id="ratePerLiter" formControlName="ratePerLiter" required>
       </div>
@@ -44,5 +44,5 @@
         </button>
       </div>
     </form>
-  <!-- </div>
-</div> -->
+  </div>
+</div>

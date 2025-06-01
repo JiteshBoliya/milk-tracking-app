@@ -15,7 +15,6 @@ import { ClientFormComponent } from "../client-form/client-form.component";
   imports: [
     CommonModule,
     RouterModule,
-    ClientFormComponent
 ],
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.scss']
@@ -26,7 +25,7 @@ export class ClientListComponent implements OnInit {
 
   constructor(
     private clientService: ClientService,
-    private router: Router
+    // private router: Router
   
   ) {}
 
@@ -35,10 +34,4 @@ export class ClientListComponent implements OnInit {
       this.clients = clients;
     });
   }
-
-  // clientDetail(id: any) {
-  //   console.log("called", id);
-    
-  //   this.router.navigate(['', id]);
-  // }
 } 

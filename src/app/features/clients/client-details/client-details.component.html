@@ -1,25 +1,29 @@
-<div class="client-details mt-4">
-
-  <!-- Client Card -->
-  <div class="card mb-4" *ngIf="client">
+<div class="client-details mt-2">
+  <div class="card mb-2" *ngIf="client">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h5 class="card-title mb-0">{{client.name }}</h5>
+      <h5 class="card-title mb-0">{{ client.name }}</h5>
       <a class="btn btn-sm btn-outline-primary" [routerLink]="['edit']">
-        <i class="bi bi-pencil"></i> <!-- Bootstrap icon or use Font Awesome -->
+        <i class="bi bi-pencil"></i>
       </a>
     </div>
     <div class="card-body">
-      <div class="client-info">
-        <p><strong>Address:</strong> {{client.address}}</p>
-        <p><strong>Contact:</strong> {{client.contact}}</p>
-        <p><strong>Milk Type:</strong> {{client.milkType}}</p>
-        <p><strong>Quantity per Day:</strong> {{client.quantityPerDay}}L</p>
-        <p><strong>Rate per Liter:</strong> ₹{{client.ratePerLiter}}</p>
+      <div class="container">
+        <div class="row g-2">
+          <div class="col-4 col-md-3 fw-bold">Address</div>
+          <div class="col-8 col-md-9">{{ client.address }}</div>
+
+          <div class="col-4 col-md-3 fw-bold">Contact</div>
+          <div class="col-8 col-md-9">{{ client.contact }}</div>
+
+          <div class="col-4 col-md-3 fw-bold">MT</div>
+          <div class="col-8 col-md-9">{{ client.milkType }}</div>
+
+          <div class="col-4 col-md-3 fw-bold">Rate:</div>
+          <div class="col-8 col-md-9">₹{{ client.ratePerLiter }}</div>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- Delivery History Card -->
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="card-title mb-0">Delivery History</h5>
@@ -33,29 +37,31 @@
           <thead class="table-light">
             <tr>
               <th>Date</th>
-              <th>Quantity (L)</th>
-              <th>Notes</th>
-              <th>Actions</th>
+              <th>QT</th>
+              <!-- <th>Notes</th> -->
+              <!-- <th>Actions</th> -->
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let delivery of deliveries$ | async">
-              <td>{{delivery.date | date}}</td>
-              <td>{{delivery.quantity}}</td>
-              <td>{{delivery.notes}}</td>
-              <td>
+            <tr *ngFor="let delivery of deliveries">
+              <td>{{ delivery.date | date }}</td>
+              <td>{{ delivery.quantity }}</td>
+              <!-- <td>{{delivery.notes}}</td> -->
+              <!-- <td>
                 <button class="btn btn-sm btn-outline-secondary me-1" (click)="editDelivery(delivery)">
                   <i class="bi bi-pencil"></i>
                 </button>
                 <button class="btn btn-sm btn-outline-danger" (click)="deleteDelivery(delivery.id!)">
                   <i class="bi bi-trash"></i>
                 </button>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-
+  <button class="btn btn-outline-danger mt-2" style="width: 100%">
+    Delete Client
+  </button>
 </div>
