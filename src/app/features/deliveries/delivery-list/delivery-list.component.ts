@@ -2,15 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { DeliveryService } from '../../../services/delivery.service';
 import { ClientService } from '../../../services/client.service';
 import { Delivery } from '../../../models/delivery.model';
@@ -23,15 +14,6 @@ import { Observable, combineLatest, map } from 'rxjs';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTableModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
     RouterModule
   ],
   templateUrl: './delivery-list.component.html',
@@ -41,7 +23,7 @@ export class DeliveryListComponent implements OnInit {
   filterForm: FormGroup;
   clients$: Observable<Client[]>;
   filteredDeliveries$: Observable<Delivery[]>;
-  dataSource = new MatTableDataSource<Delivery>([]);
+  dataSource: any;
   displayedColumns: string[] = ['date', 'clientName', 'quantity', 'notes', 'actions'];
 
   constructor(
@@ -60,7 +42,7 @@ export class DeliveryListComponent implements OnInit {
       map(deliveries => deliveries || [])
     );
     this.filteredDeliveries$.subscribe(deliveries => {
-      this.dataSource.data = deliveries || [];
+      this.dataSource = deliveries || [];
     });
   }
 
