@@ -8,8 +8,7 @@ import { ClientListComponent } from "./features/clients/client-list/client-list.
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule,
-    ClientListComponent
+    RouterModule
 ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

@@ -1,0 +1,61 @@
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.header-gradient {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+}
+
+.footer-gradient {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+}
+
+.info-section {
+  border-color: #2c3e50 !important;
+}
+
+.icon-client {
+  background-color: #2c3e50;
+}
+
+.icon-period {
+  background-color: #27ae60;
+}
+
+.icon-rate {
+  background-color: #f39c12;
+}
+
+.icon-type {
+  background-color: #3498db;
+}
+
+.table-title {
+  color: #2c3e50;
+}
+
+.table-icon {
+  color: #3498db;
+}
+
+.table-header {
+  background-color: #2c3e50 !important;
+}
+
+.date-circle {
+  width: 32px;
+  height: 32px;
+  background-color: #3498db;
+}
+
+.quantity-badge {
+  background-color: #27ae60 !important;
+}
+
+.summary-card {
+  background-color: rgba(255, 255, 255, 0.1);
+}

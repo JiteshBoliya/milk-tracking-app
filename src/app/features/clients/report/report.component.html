@@ -1,0 +1,232 @@
+<div class="min-h-screen bg-light">
+  <div class="container-fluid py-4">
+    <!-- Filters Section (Added this above client info) -->
+    <div class="bg-white p-3 rounded-3 shadow-sm mb-4">
+      <div class="row g-3 align-items-end">
+        <!-- Select Client -->
+        <div class="col-12 col-md-4">
+          <label for="clientSelect" class="form-label fw-semibold"
+            >Select Client</label
+          >
+          <select id="clientSelect" class="form-select">
+            <option>client.name 1</option>
+            <option>client.name2</option>
+            <option>client.name3</option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <label for="monthYearInput" class="form-label fw-semibold"
+            >Select Month & Year</label
+          >
+          <input type="month" id="monthYearInput" class="form-control" />
+        </div>
+
+        <!-- Filter Button -->
+        <div class="col-12 col-md-2 text-md-end">
+          <button class="btn btn-primary w-100">
+            <i class="fas fa-search me-2"></i>Load Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-8">
+        <div class="card shadow-lg border-0">
+          <!-- Header -->
+          <div class="card-header header-gradient">
+            <div class="row align-items-center">
+              <div class="col-12 col-md-8">
+                <h2 class="text-white mb-0 fw-bold">
+                  <i class="fas fa-clipboard-list me-2 text-white"></i>
+                  Monthly Milk Report
+                </h2>
+              </div>
+              <div class="col-12 col-md-4 text-md-end mt-2 mt-md-0">
+                <button
+                  (click)="shareOnWhatsApp()"
+                  class="btn btn-light btn-sm shadow-sm text-dark fw-semibold"
+                >
+                  <i class="fab fa-whatsapp me-2 text-success"></i>
+                  Share on WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Client Info Section -->
+          <div class="card-body bg-white">
+            <div class="row mb-4">
+              <div class="col-12">
+                <div
+                  class="bg-light rounded-3 p-4 border-start border-4 info-section"
+                >
+                  <div class="row g-3">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                      <div class="d-flex align-items-center">
+                        <div class="rounded-circle p-2 me-3 icon-client">
+                          <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                          <small class="text-muted d-block">Client Name</small>
+                          <strong class="text-dark">{{
+                            reportData.clientName
+                          }}</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                      <div class="d-flex align-items-center">
+                        <div class="rounded-circle p-2 me-3 icon-period">
+                          <i class="fas fa-calendar text-white"></i>
+                        </div>
+                        <div>
+                          <small class="text-muted d-block">Period</small>
+                          <strong class="text-dark"
+                            >{{ reportData.month }}
+                            {{ reportData.year }}</strong
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                      <div class="d-flex align-items-center">
+                        <div class="rounded-circle p-2 me-3 icon-rate">
+                          <i class="fas fa-tags text-white"></i>
+                        </div>
+                        <div>
+                          <small class="text-muted d-block"
+                            >Rate per Liter</small
+                          >
+                          <strong class="text-dark"
+                            >₹{{ reportData.milkRate }}</strong
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                      <div class="d-flex align-items-center">
+                        <div class="rounded-circle p-2 me-3 icon-type">
+                          <i class="fas fa-tint text-white"></i>
+                        </div>
+                        <div>
+                          <small class="text-muted d-block">Milk Type</small>
+                          <strong class="text-dark">{{
+                            reportData.milkType
+                          }}</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Daily Records Table -->
+            <div class="row">
+              <div class="col-12">
+                <h4 class="mb-3 fw-semibold table-title">
+                  <i class="fas fa-table me-2 table-icon"></i>
+                  Daily Milk Records
+                </h4>
+                <div class="table-responsive shadow-sm rounded-3">
+                  <table class="table table-hover mb-0">
+                    <thead class="table-header">
+                      <tr>
+                        <th class="py-3 fw-semibold">
+                          <i class="fas fa-calendar-day me-2"></i>Date
+                        </th>
+                        <th class="py-3 fw-semibold text-center">
+                          <i class="fas fa-balance-scale me-2"></i>QTL
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="
+                          let record of reportData.dailyRecords;
+                          let i = index
+                        "
+                        class="border-bottom"
+                      >
+                        <td class="py-3">
+                          <div class="d-flex align-items-center">
+                            <div
+                              class="rounded-circle me-3 d-flex align-items-center justify-content-center date-circle"
+                            >
+                              <small class="text-white fw-bold">{{
+                                getDateNumber(record.date)
+                              }}</small>
+                            </div>
+                            <span class="fw-medium text-dark">{{
+                              formatDate(record.date)
+                            }}</span>
+                          </div>
+                        </td>
+                        <td class="py-3 text-end">
+                          <span
+                            class="badge text-white fw-semibold px-3 py-2 quantity-badge"
+                          >
+                            {{ record.quantity }} L
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Summary -->
+          <div class="card-footer footer-gradient">
+            <div class="row g-3 text-white">
+              <div class="col-12 col-md-4">
+                <div class="text-center p-3 rounded-3 summary-card">
+                  <i class="fas fa-calendar-check fa-2x mb-2 text-white"></i>
+                  <h6 class="mb-1 text-uppercase fw-bold text-white">
+                    Reporting Period
+                  </h6>
+                  <h4 class="mb-0 fw-bold text-white">
+                    {{ reportData.month }} {{ reportData.year }}
+                  </h4>
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="text-center p-3 rounded-3 summary-card">
+                  <i class="fas fa-tint fa-2x mb-2 text-white"></i>
+                  <h6 class="mb-1 text-uppercase fw-bold text-white">
+                    Total Quantity
+                  </h6>
+                  <h4 class="mb-0 fw-bold text-white">
+                    {{ totalQuantity }} Liters
+                  </h4>
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="text-center p-3 rounded-3 summary-card">
+                  <i class="fas fa-rupee-sign fa-2x mb-2 text-white"></i>
+                  <h6 class="mb-1 text-uppercase fw-bold text-white">
+                    Total Amount
+                  </h6>
+                  <h4 class="mb-0 fw-bold text-white">₹{{ totalAmount }}</h4>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-12 text-center">
+                <small class="text-white">
+                  <i class="fas fa-info-circle me-1 text-white"></i>
+                  Report generated on {{ getCurrentDate() }} | Rate: ₹{{
+                    reportData.milkRate
+                  }}/L
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ClientService } from '../../../services/client.service';
 import { Client } from '../../../models/client.model';
-import { ClientFormComponent } from "../client-form/client-form.component";
+import { ReportComponent } from "../report/report.component";
 
 @Component({
   selector: 'app-client-list',
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule,
+    RouterModule
 ],
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.scss']
